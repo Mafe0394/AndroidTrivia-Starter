@@ -20,7 +20,7 @@ class TitleFragment : Fragment() {
         val binding=
             DataBindingUtil.inflate<FragmentTitleBinding>(inflater,R.layout.fragment_title,container,false)
         binding.playButton.setOnClickListener { view->
-            view.findNavController().navigate(R.id.action_titleFragment_to_gameFragment)
+            view.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
         }
 
         // Three dot options menu
