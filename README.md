@@ -61,7 +61,11 @@ through this process.)
 3. Build and run the sample. You may need to update gradle and library versions. 
 Follow the guidance provided by Android Studio.
 
-- Lesson 3: [Navigation](https://codelabs.developers.google.com/codelabs/kotlin-android-training-create-and-add-fragment/index.html?index=..%2F..android-kotlin-fundamentals#0)
-- Lesson 4: [Activity and Fragment LifeCycle](https://developer.android.com/codelabs/kotlin-android-training-lifecycles-logging?index=..%2F..android-kotlin-fundamentals#7)
-- Lesson 5: [Android Kotlin Fundamentals: 5.1 ViewModel](https://developer.android.com/codelabs/kotlin-android-training-view-model?index=..%2F..android-kotlin-fundamentals#9)
+- Lesson 3: 
+  - [Navigation](https://codelabs.developers.google.com/codelabs/kotlin-android-training-create-and-add-fragment/index.html?index=..%2F..android-kotlin-fundamentals#0)
+  - [Android Kotlin Fundamentals: 03.3 Start an external Activity](https://developer.android.com/codelabs/kotlin-android-training-start-external-activity#6)
+- Lesson 4: 
+  - [Activity and Fragment LifeCycle](https://developer.android.com/codelabs/kotlin-android-training-lifecycles-logging?index=..%2F..android-kotlin-fundamentals#7)
+- Lesson 5: 
+  - [Android Kotlin Fundamentals: 5.1 ViewModel](https://developer.android.com/codelabs/kotlin-android-training-view-model?index=..%2F..android-kotlin-fundamentals#9)
   - [Android Kotlin Fundamentals: LiveData and LiveData observers](https://developer.android.com/codelabs/kotlin-android-training-live-data#10)
