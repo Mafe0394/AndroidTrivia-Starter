@@ -59,4 +59,7 @@ through this process.)
 2. Download the starter sample for the codelab.
 2. Open the sample into Android Studio.
 3. Build and run the sample. You may need to update gradle and library versions. 
-Follow the guidance provided by Android Studio. 
+Follow the guidance provided by Android Studio.
+
+- Lesson 3:[Navigation](https://codelabs.developers.google.com/codelabs/kotlin-android-training-create-and-add-fragment/index.html?index=..%2F..android-kotlin-fundamentals#0)
+- Lesson 4: [Activity and Fragment LifeCycle](https://developer.android.com/codelabs/kotlin-android-training-lifecycles-logging?index=..%2F..android-kotlin-fundamentals#7)
