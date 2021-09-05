@@ -69,3 +69,4 @@ Follow the guidance provided by Android Studio.
 - Lesson 5: 
   - [Android Kotlin Fundamentals: 5.1 ViewModel](https://developer.android.com/codelabs/kotlin-android-training-view-model?index=..%2F..android-kotlin-fundamentals#9)
   - [Android Kotlin Fundamentals: LiveData and LiveData observers](https://developer.android.com/codelabs/kotlin-android-training-live-data#10)
+  - [Android Kotlin Fundamentals: Data binding with ViewModel and LiveData] (https://developer.android.com/codelabs/kotlin-android-training-live-data-data-binding#5)
