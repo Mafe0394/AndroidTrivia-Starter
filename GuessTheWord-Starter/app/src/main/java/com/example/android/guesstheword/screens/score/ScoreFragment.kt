@@ -53,11 +53,13 @@ class ScoreFragment : Fragment() {
 
         viewModelFactory= ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments()).score)
         viewModel=ViewModelProvider(this,viewModelFactory).get(ScoreViewModel::class.java)
+        binding.scoreViewModel=viewModel
+        // Setting the Fragment view as the lifecycle owner of the binding variable.
+        // This defines the scope of the LifeData object above, allowing the object to automatically
+        // update the views in the layout.
+        binding.lifecycleOwner=viewLifecycleOwner
 
         // Obervers
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore->
-            binding.scoreText.text=newScore.toString()
-        })
         viewModel.eventPlayAgain.observe(viewLifecycleOwner, Observer { playAgain->
             if(playAgain){
                 findNavController().navigate(ScoreFragmentDirections.actionRestart())
@@ -66,8 +68,6 @@ class ScoreFragment : Fragment() {
 
         })
 
-        // Click Listeners
-        binding.playAgainButton.setOnClickListener { viewModel.onPlayAgain() }
         return binding.root
     }
 }

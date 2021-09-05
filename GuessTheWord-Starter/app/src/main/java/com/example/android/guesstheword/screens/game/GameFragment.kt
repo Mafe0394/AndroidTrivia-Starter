@@ -41,62 +41,48 @@ class GameFragment : Fragment() {
 
     private lateinit var binding: GameFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.game_fragment,
-                container,
-                false
+            inflater,
+            R.layout.game_fragment,
+            container,
+            false
         )
 
         // ViewModel initialization
         Log.i("GameFragment", "Called ViewModelProvider.get")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        // Set the viewModel for databinding - this allows the bound layout access
+        // to all the data in the viewModel
+        binding.gameViewModel = viewModel
+
+        // Setting the Fragment view as the lifecycle owner of the binding variable.
+        // This defines the scope of the LifeData object above, allowing the object to automatically
+        // update the views in the layout.
+        binding.lifecycleOwner=viewLifecycleOwner
 
         // Observers, we use them to update the view
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore->
-            binding.scoreText.text=newScore.toString()
-        })
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord->
-            binding.wordText.text=newWord
-        })
-        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { hasFinished->
+        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished) gameFinished()
         })
-
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
-        binding.endGameButton.setOnClickListener { onEndGame() }
 
         return binding.root
 
     }
 
-    /** Methods for buttons presses **/
-
-    private fun onSkip() {
-        viewModel.onSkip()
-    }
-
-    private fun onCorrect() {
-        viewModel.onCorrect()
-    }
-
-    private fun onEndGame() {
-        gameFinished()
-    }
-
     /**
      * Called when the game is finished
      * */
-    private fun gameFinished(){
-        Toast.makeText(activity,"Game has just finished",Toast.LENGTH_SHORT).show()
+    private fun gameFinished() {
+        Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
         viewModel.onGameFinishComplete()
-        val action=GameFragmentDirections.actionGameToScore()
-        action.score=viewModel.score.value?:0
+        val action = GameFragmentDirections.actionGameToScore()
+        action.score = viewModel.score.value ?: 0
         NavHostFragment.findNavController(this).navigate(action)
     }
 }
