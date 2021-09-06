@@ -71,3 +71,5 @@ Follow the guidance provided by Android Studio.
   - [Android Kotlin Fundamentals: LiveData and LiveData observers](https://developer.android.com/codelabs/kotlin-android-training-live-data#10)
   - [Android Kotlin Fundamentals: Data binding with ViewModel and LiveData](https://developer.android.com/codelabs/kotlin-android-training-live-data-data-binding#5)
   - [Android Kotlin Fundamentals: 5.4 LiveData transformations](https://developer.android.com/codelabs/kotlin-android-training-live-data-transformations#7)
+- Lesson 6:
+  - [Android Kotlin Fundamentals: Create a Room Database](https://developer.android.com/codelabs/kotlin-android-training-room-database#6)
