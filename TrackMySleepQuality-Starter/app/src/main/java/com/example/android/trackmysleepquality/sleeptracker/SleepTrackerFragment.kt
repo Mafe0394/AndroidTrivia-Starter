@@ -22,7 +22,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.trackmysleepquality.R
+import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.databinding.FragmentSleepTrackerBinding
 
 /**
@@ -37,12 +39,29 @@ class SleepTrackerFragment : Fragment() {
      *
      * This function uses DataBindingUtil to inflate R.layout.fragment_sleep_quality.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Get a reference to the binding object and inflate the fragment views.
         val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sleep_tracker, container, false)
+            inflater, R.layout.fragment_sleep_tracker, container, false
+        )
+
+        // Reference to the app that this fragment is attached to
+        val application = requireNotNull(this.activity).application
+        // Reference to the data source via a reference to de DAO
+        val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
+        // viewModelFactory instance
+        val viewModelFactory = SleepTrackerViewModelFactory(dataSource, application)
+
+        // ViewModel
+        val sleepTrackerViewModel =
+            ViewModelProvider(this, viewModelFactory).get(SleepTrackerViewModel::class.java)
+        // Setting lifeCycleOwner
+        binding.setLifecycleOwner(this)
+        binding.sleepTrackerViewModel=sleepTrackerViewModel
 
         return binding.root
     }
