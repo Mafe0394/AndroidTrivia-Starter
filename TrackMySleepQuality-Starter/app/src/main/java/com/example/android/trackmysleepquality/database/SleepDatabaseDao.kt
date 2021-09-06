@@ -23,7 +23,7 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface SleepDatabaseDao{
+interface SleepDatabaseDao {
 
     @Insert
     fun insert(night: SleepNight)
@@ -37,7 +37,7 @@ interface SleepDatabaseDao{
     * WHERE the nightId matches the key argument */
 
     @Query("SELECT * from daily_sleep_quality_table WHERE nightId =:key")
-    fun get(key:Long):SleepNight?
+    fun get(key: Long): SleepNight?
 
     /* The @DELETE nnotation deletes one item or a list of items
     * We need to know what is in  the table. This  annotation is great for deleting
@@ -49,10 +49,10 @@ interface SleepDatabaseDao{
     * ordered by nightId in descending order.
     * We use LIMIT 1 to return only one element*/
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC LIMIT 1")
-    fun getTonight():SleepNight?
+    fun getTonight(): SleepNight?
 
     /* This function returns a list of SleepNight entities as LiveData.
     * Room keeps this LiveData updated for us, which meas we only need to explicitly get the data once*/
-    @Query("SELECT * from daily_sleep_quality_table ORDER BY nightId DESC")
-    fun getAll():  LiveData<List<SleepNight>>
+    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC")
+    fun getAll(): LiveData<List<SleepNight>>
 }
