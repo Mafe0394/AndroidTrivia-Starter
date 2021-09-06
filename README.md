@@ -73,3 +73,4 @@ Follow the guidance provided by Android Studio.
   - [Android Kotlin Fundamentals: 5.4 LiveData transformations](https://developer.android.com/codelabs/kotlin-android-training-live-data-transformations#7)
 - Lesson 6:
   - [Android Kotlin Fundamentals: Create a Room Database](https://developer.android.com/codelabs/kotlin-android-training-room-database#6)
+  - [Android Kotlin Fundamentals:6.2 Coroutines and Room](https://developer.android.com/codelabs/kotlin-android-training-coroutines-and-room#7)
