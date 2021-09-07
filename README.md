@@ -74,3 +74,4 @@ Follow the guidance provided by Android Studio.
 - Lesson 6:
   - [Android Kotlin Fundamentals: Create a Room Database](https://developer.android.com/codelabs/kotlin-android-training-room-database#6)
   - [Android Kotlin Fundamentals:6.2 Coroutines and Room](https://developer.android.com/codelabs/kotlin-android-training-coroutines-and-room#7)
+  - [Android Kotlin Fundamentals: Use LiveData to control button states](https://developer.android.com/codelabs/kotlin-android-training-quality-and-states#6)
