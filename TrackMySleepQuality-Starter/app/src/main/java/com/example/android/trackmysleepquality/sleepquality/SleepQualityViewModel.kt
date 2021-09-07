@@ -20,43 +20,41 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.android.trackmysleepquality.database.SleepNight
 import kotlinx.coroutines.launch
 
-class SleepQualityViewModel (private val sleepNightKey:Long=0L,val database: SleepDatabaseDao):ViewModel(){
+class SleepQualityViewModel(private val sleepNightKey: Long = 0L, val database: SleepDatabaseDao) :
+    ViewModel() {
 
-    private val _navigateToSleepTracker=MutableLiveData<Boolean?>()
-
-    val navigateToSleepTracker:LiveData<Boolean?>
+    private val _navigateToSleepTracker = MutableLiveData<Boolean?>()
+    val navigateToSleepTracker: LiveData<Boolean?>
         get() = _navigateToSleepTracker
-    init {
 
-    }
 
-    fun doneNavigating(){
-        _navigateToSleepTracker.value=null
+    fun doneNavigating() {
+        _navigateToSleepTracker.value = null
     }
 
     // onClick handlers
-    fun onSetSleepQuality(quality:Int){
+    fun onSetSleepQuality(quality: Int) {
         viewModelScope.launch {
-            val tonight=getNight(sleepNightKey)        ?: return@launch
-            tonight.sleepQuality=quality
+            val tonight = getNight(sleepNightKey) ?: return@launch
+            tonight.sleepQuality = quality
             updateQuality(tonight)
 
             // Setting this state variable to true will alert the observer and trigger the nav
-            _navigateToSleepTracker.value=true
+            _navigateToSleepTracker.value = true
         }
     }
 
     // async functions
 
-    suspend fun updateQuality(night: SleepNight){
+    suspend fun updateQuality(night: SleepNight) {
         database.update(night)
     }
-    suspend fun getNight(nightID:Long):SleepNight?{
+
+    suspend fun getNight(nightID: Long): SleepNight? {
         return database.get(nightID)
     }
 

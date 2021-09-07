@@ -33,14 +33,14 @@ class SleepTrackerViewModel(
     application: Application
 ) : AndroidViewModel(application) {
     private var tonight = MutableLiveData<SleepNight>()
-    private val nights=database.getAllNights()
+    private val nights = database.getAllNights()
 
-    private val _navigateToSleepQuality=MutableLiveData<SleepNight>()
-    val navigateToSleepQuality:LiveData<SleepNight>
-        get() =_navigateToSleepQuality
+    private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
+    val navigateToSleepQuality: LiveData<SleepNight>
+        get() = _navigateToSleepQuality
 
-    val nightsString=Transformations.map(nights){nights->
-        formatNights(nights,application.resources)
+    val nightsString = Transformations.map(nights) { nights ->
+        formatNights(nights, application.resources)
     }
 
     init {
@@ -52,9 +52,10 @@ class SleepTrackerViewModel(
             tonight.value = getTonightFromDatabase()
         }
     }
-    fun doneNavigating(){
+
+    fun doneNavigating() {
         // resets the variable
-        _navigateToSleepQuality.value=null
+        _navigateToSleepQuality.value = null
     }
 
     // Async functions
@@ -70,10 +71,12 @@ class SleepTrackerViewModel(
         // Room uses Dispatchers.IO
         database.insert(newNight)
     }
-    private suspend fun update(night: SleepNight){
+
+    private suspend fun update(night: SleepNight) {
         database.update(night)
     }
-    private suspend fun clear(){
+
+    private suspend fun clear() {
         database.clear()
     }
 
@@ -85,18 +88,20 @@ class SleepTrackerViewModel(
             tonight.value = getTonightFromDatabase()
         }
     }
-    fun onStopTracking(){
+
+    fun onStopTracking() {
         viewModelScope.launch {
-            val oldNight=tonight.value?:return@launch
-            oldNight.endTimeMilli=System.currentTimeMillis()
+            val oldNight = tonight.value ?: return@launch
+            oldNight.endTimeMilli = System.currentTimeMillis()
             update(oldNight)
-            _navigateToSleepQuality.value=oldNight
+            _navigateToSleepQuality.value = oldNight
         }
     }
-    fun onClear(){
+
+    fun onClear() {
         viewModelScope.launch {
             clear()
-            tonight.value=null
+            tonight.value = null
         }
     }
 }
