@@ -76,5 +76,6 @@ Follow the guidance provided by Android Studio.
   - [Android Kotlin Fundamentals:6.2 Coroutines and Room](https://developer.android.com/codelabs/kotlin-android-training-coroutines-and-room#7)
   - [Android Kotlin Fundamentals: Use LiveData to control button states](https://developer.android.com/codelabs/kotlin-android-training-quality-and-states#6)
 
-- Lesson 7:
+- Lesson 8:
   - [Android Kotlin Fundamentals: 8.1 Getting data from the internet](https://developer.android.com/codelabs/kotlin-android-training-internet-data?index=..%2F..android-kotlin-fundamentals#7)  
+  - [Android Kotlin Fundamentals: Loading and displaying images from the Internet](https://developer.android.com/codelabs/kotlin-android-training-internet-images#6)
