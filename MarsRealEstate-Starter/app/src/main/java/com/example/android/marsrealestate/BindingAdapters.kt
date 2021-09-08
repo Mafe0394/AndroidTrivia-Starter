@@ -17,3 +17,26 @@
 
 package com.example.android.marsrealestate
 
+import android.widget.ImageView
+import androidx.core.net.toUri
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+
+/* The @BindingAdapter annotation tells data binding that we want this binding adapter
+* executed when an XML item has the imageUrl attribute
+* We may have to add android{...kotlinOptions{jvmTarget=JavaVersion.VERSION_1_8.toString()}...}*/
+@BindingAdapter("imageUrl")
+fun bindImage(imgView:ImageView,imgUrl:String?){
+    imgUrl?.let {url->
+        // Converts the URL string (from the XML) to a URI object
+        // The server requires to use secure scheme (HTTPS)
+        val imgUri=url.toUri().buildUpon().scheme("https").build()
+        Glide.with(imgView.context)
+            .load(imgUri)
+            .apply(RequestOptions()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image))
+            .into(imgView)
+    }
+}
