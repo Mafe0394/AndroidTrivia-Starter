@@ -20,23 +20,38 @@ package com.example.android.marsrealestate
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.android.marsrealestate.network.MarsProperty
+import com.example.android.marsrealestate.overview.PhotoGridAdapter
 
 /* The @BindingAdapter annotation tells data binding that we want this binding adapter
 * executed when an XML item has the imageUrl attribute
 * We may have to add android{...kotlinOptions{jvmTarget=JavaVersion.VERSION_1_8.toString()}...}*/
 @BindingAdapter("imageUrl")
-fun bindImage(imgView:ImageView,imgUrl:String?){
-    imgUrl?.let {url->
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let { url ->
         // Converts the URL string (from the XML) to a URI object
         // The server requires to use secure scheme (HTTPS)
-        val imgUri=url.toUri().buildUpon().scheme("https").build()
+        val imgUri = url.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
             .load(imgUri)
-            .apply(RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image))
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
             .into(imgView)
     }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<MarsProperty>?
+) {
+    val adapter = recyclerView.adapter as PhotoGridAdapter
+    // Tells the RecyclerView when a new list is available
+    adapter.submitList(data)
 }
