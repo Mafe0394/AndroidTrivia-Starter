@@ -33,5 +33,5 @@
         android:adjustViewBounds="true"
         android:padding="2dp"
         tools:src="@tools:sample/backgrounds/scenic"
-        app:imageUrl="@{property.imgSrcURL}"/>
+        app:imageUrl="@{property.imgSrcURL}" />
 </layout>
