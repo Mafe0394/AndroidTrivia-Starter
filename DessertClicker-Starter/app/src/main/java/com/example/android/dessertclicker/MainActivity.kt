@@ -29,11 +29,15 @@ import androidx.databinding.DataBindingUtil
 import com.example.android.dessertclicker.databinding.ActivityMainBinding
 import timber.log.Timber
 
+const val KEY_REVENUE="key_revenue"
+const val KEY_AMOUNT_SOLD="key_amount_sold"
+const val KEY_TIMER="key_timer"
+
 class MainActivity : AppCompatActivity() {
 
     private var revenue = 0
     private var dessertsSold = 0
-    private val dessertTimer=DessertTimer()
+    private lateinit var dessertTimer: DessertTimer
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
@@ -68,13 +72,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        dessertTimer=DessertTimer(this.lifecycle)
         Timber.i("onCreate Called")
+
+
 
         // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.dessertButton.setOnClickListener {
             onDessertClicked()
+        }
+
+        savedInstanceState?.let {
+            revenue=it.getInt(KEY_REVENUE)
+            dessertsSold=it.getInt(KEY_AMOUNT_SOLD)
+            dessertTimer.secondsCount=it.getInt(KEY_TIMER)
         }
 
         // Set the TextViews to the right values
@@ -124,6 +137,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_REVENUE,revenue)
+        outState.putInt(KEY_AMOUNT_SOLD,dessertsSold)
+        outState.putInt(KEY_TIMER, dessertTimer.secondsCount)
+        Timber.i("onSaveInstanceState called")
+    }
+
     /**
      * Menu methods
      */
@@ -154,7 +175,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        dessertTimer.startTimer()
         Timber.i("onStart Called")
     }
 
@@ -170,7 +190,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        dessertTimer.stopTimer()
         Timber.i("onStop Called")
     }
 

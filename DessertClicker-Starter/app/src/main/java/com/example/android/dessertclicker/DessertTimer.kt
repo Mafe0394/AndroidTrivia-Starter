@@ -19,6 +19,8 @@
 import android.os.Handler
 import timber.log.Timber
 import android.os.Looper
+import androidx.lifecycle.*
+
 ///**
 // * This is a class representing a timer that you can start or stop. The secondsCount outputs a count of
 // * how many seconds since it started, every one second.
@@ -34,7 +36,7 @@ import android.os.Looper
 // * https://developer.android.com/guide/components/processes-and-threads
 // *
 // */
-class DessertTimer {
+class DessertTimer(lifeCycle:Lifecycle ):LifecycleEventObserver {
 
     // The number of seconds counted since the timer started
     var secondsCount = 0
@@ -45,6 +47,15 @@ class DessertTimer {
      */
     private var handler = Handler(Looper.getMainLooper())
     private lateinit var runnable: Runnable
+
+    init {
+        lifeCycle.addObserver(this)
+    }
+
+
+    fun dummyMethod(){
+        Timber.i("I was called")
+    }
 
 
     fun startTimer() {
@@ -68,5 +79,14 @@ class DessertTimer {
         // Removes all pending posts of runnable from the handler's queue, effectively stopping the
         // timer
         handler.removeCallbacks(runnable)
+    }
+
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if(event == Lifecycle.Event.ON_PAUSE)
+            stopTimer()
+
+        if (event== Lifecycle.Event.ON_START)
+            startTimer()
+
     }
 }
